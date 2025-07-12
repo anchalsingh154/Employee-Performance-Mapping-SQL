@@ -1,17 +1,19 @@
-# 1. Create a database named employee
+# Created a database named employee
 create schema employee ;
 
-/* 3.	Write a query to fetch EMP_ID, FIRST_NAME, LAST_NAME, GENDER, and DEPARTMENT from the employee record table, 
-and make a list of employees and details of their department. */
+-- Purpose: Retrieve employee details along with department information
+-- Tables Used: employee_record
+-- Columns: EMP_ID, FIRST_NAME, LAST_NAME, GENDER, DEPARTMENT
 
 SELECT 
     EMP_ID, FIRST_NAME, LAST_NAME, GENDER, DEPT
 FROM
     emp_record_table;
 
-/* 4. Write a query to fetch EMP_ID, FIRST_NAME, LAST_NAME, GENDER, DEPARTMENT, and EMP_RATING if the EMP_RATING is: 
-*/
--- ●	less than two --
+-- Query: Retrieve Employees with Low Performance Ratings
+-- Description: Fetch EMP_ID, FIRST_NAME, LAST_NAME, GENDER, DEPARTMENT, and EMP_RATING 
+--              for employees whose EMP_RATING is less than 2.
+
 SELECT 
     EMP_ID, FIRST_NAME, LAST_NAME, GENDER, DEPT, EMP_RATING
 FROM
@@ -35,8 +37,9 @@ FROM
 WHERE
     EMP_RATING BETWEEN 2 AND 4;
 
-/* 5.	Write a query to concatenate the FIRST_NAME and the LAST_NAME of employees in the Finance department 
-from the employee table and then give the resultant column alias as NAME. */
+-- Query: Full Name of Employees in Finance Department
+-- Description: Concatenate FIRST_NAME and LAST_NAME of employees 
+--   		from the 'Finance' department and alias the result as 'NAME'.
 
 SELECT 
     CONCAT(FIRST_NAME, ' ', LAST_NAME) AS 'NAME', DEPT
@@ -45,8 +48,10 @@ FROM
 WHERE
     DEPT = 'FINANCE';
 
-/*6. Write a query to list only those employees who have someone reporting to them. 
-Also, show the number of reporters (including the President).*/
+-- Query: List Employees Who Have Reporters
+-- Description: Identify employees who have subordinates (direct reports),
+--              including the President, and display the count of reporters.
+-- Assumption: EMPLOYEE_ID and MANAGER_ID columns exist in employee_record table.
 
 SELECT 
     e.MANAGER_ID AS 'EMP_ID',
@@ -58,8 +63,10 @@ FROM
 GROUP BY 1
 ORDER BY 2 DESC;
 
-/*7. Write a query to list down all the employees from the healthcare and finance departments using union. 
-Take data from the employee record table.*/
+-- Query: Employees from Healthcare and Finance Departments
+-- Description: Retrieve a list of employees working in either the 
+--              Healthcare or Finance departments using UNION.
+-- Table Used: employee_record
 
 SELECT 
     *
@@ -74,16 +81,20 @@ FROM
 WHERE
     DEPT = 'HEALTHCARE';
 
-/* 8. Write a query to list down employee details such as EMP_ID, FIRST_NAME, LAST_NAME, ROLE, DEPARTMENT, and 
-EMP_RATING grouped by dept. Also include the respective employee rating along with the max emp rating for the department. */
+-- Query: Employee Details with Department-Wise Max Rating
+-- Description: List EMP_ID, FIRST_NAME, LAST_NAME, ROLE, DEPARTMENT, EMP_RATING,
+--              and the MAX EMP_RATING within the same department.
+-- Table Used: employee_record
 
 select e.EMP_ID, e.FIRST_NAME, e.LAST_NAME, e.ROLE, e.DEPT, e.EMP_RATING, 
 max(e.EMP_RATING) over(partition by e.DEPT) as 'max_emp_rating'
 from emp_record_table as e
 order by e.DEPT, e.EMP_RATING desc;
 
-/*9. Write a query to calculate the minimum and the maximum salary of the employees in each role. 
-Take data from the employee record table. */
+-- Query: Minimum and Maximum Salary by Role
+-- Description: Calculate the lowest and highest salary for each distinct role
+--              in the employee_record table.
+-- Table Used: employee_record
 
 SELECT 
     ROLE,
@@ -100,8 +111,10 @@ dense_rank() over(order by EXP desc) as 'emp_rank'
 from emp_record_table
 order by emp_rank;
 
-/*11. Write a query to create a view that displays employees in various countries whose salary is more than six thousand. 
-Take data from the employee record table. */
+-- View: high_salary_employees_by_country
+-- Description: Create a view to list employees from different countries 
+--              where the SALARY is greater than 6000.
+-- Table Used: employee_record
 
 CREATE VIEW high_salary_emp AS
     SELECT 
@@ -122,8 +135,10 @@ FROM
 WHERE
     EXP > 10;
 
-/* 13. Write a query to create a stored procedure to retrieve the details of the employees 
-whose experience is more than three years. Take data from the employee record table.*/
+-- Procedure: get_employees_with_experience
+-- Description: Create a stored procedure to retrieve all employee details
+--              for those with more than 3 years of experience.
+-- Table Used: employee_record
 
 DELIMITER &
 CREATE procedure GetExperiencedEmp()
@@ -134,15 +149,23 @@ DELIMITER ;
 
 CALL GetExperiencedEmp;
 
-/* 14.	Write a query using stored functions in the project table to check 
-whether the job profile assigned to each employee in the data science team matches the organization’s set standard.
-
-The standard being:
-For an employee with experience less than or equal to 2 years assign 'JUNIOR DATA SCIENTIST',
-For an employee with the experience of 2 to 5 years assign 'ASSOCIATE DATA SCIENTIST',
-For an employee with the experience of 5 to 10 years assign 'SENIOR DATA SCIENTIST',
-For an employee with the experience of 10 to 12 years assign 'LEAD DATA SCIENTIST',
-For an employee with the experience of 12 to 16 years assign 'MANAGER'. */
+-- ============================================================
+-- Task: Validate Job Profiles for Data Science Team
+-- Description: Create a stored function to return the standard job profile 
+--              based on experience levels. Then, compare it with the actual 
+--              assigned roles of employees in the Data Science department 
+--              to check for any mismatches.
+-- 
+-- Standard Role Mapping:
+-- • Experience ≤ 2 years           → JUNIOR DATA SCIENTIST
+-- • Experience > 2 and ≤ 5 years  → ASSOCIATE DATA SCIENTIST
+-- • Experience > 5 and ≤ 10 years → SENIOR DATA SCIENTIST
+-- • Experience > 10 and ≤ 12 years→ LEAD DATA SCIENTIST
+-- • Experience > 12 and ≤ 16 years→ MANAGER
+--
+-- Tables Involved: employee_record, project
+-- Output: EMP_ID, NAME, EXPERIENCE, ASSIGNED ROLE, EXPECTED ROLE, MATCH STATUS
+--
 
 DELIMITER &&
 CREATE function Get_Job_Profile(
@@ -172,22 +195,36 @@ end as STATUS
 from data_science_team;
 
 
-/* 15. Create an index to improve the cost and performance of the query to find the employee 
-whose FIRST_NAME is ‘Eric’ in the employee table after checking the execution plan. */
+-- Task: Performance Optimization with Index
+-- Description: Create an index on the FIRST_NAME column in the employee_record table 
+--              to optimize query performance when searching for employees named 'Eric'.
+-- Objective: Improve query execution cost based on EXPLAIN plan analysis.
+-- Table Affected: employee_record
+-- Index Target: FIRST_NAME
 
 create index IDX_empfirst_name ON emp_record_table(FIRST_NAME(50));
 
 SELECT * FROM emp_record_table WHERE FIRST_NAME = 'Eric';
 
-/* 16. Write a query to calculate the bonus for all the employees, 
-based on their ratings and salaries (Use the formula: 5% of salary * employee rating).*/
+-- Task: Calculate Employee Bonus Based on Rating and Salary
+-- Description: Compute the bonus for all employees using the formula:
+--              Bonus = 5% of SALARY × EMP_RATING
+-- Objective: Derive a new column that reflects performance-based incentives.
+-- Table Used: employee_record
+-- Columns Used: SALARY, EMP_RATING
+-- Output: EMP_ID, FIRST_NAME, LAST_NAME, SALARY, EMP_RATING, BONUS
 
 SELECT EMP_ID, FIRST_NAME, LAST_NAME, ROLE, DEPT, SALARY, EMP_RATING, 
 ((SALARY*0.05) * EMP_RATING) AS 'Bonus' 
 FROM emp_record_table;
 
-/*17. Write a query to calculate the average salary distribution based on the continent and country.
- Take data from the employee record table.*/
+-- Task: Calculate Average Salary Distribution by Continent and Country
+-- Description: Analyze salary patterns by computing the average salary 
+--              grouped by both CONTINENT and COUNTRY.
+-- Objective: Identify geographic salary trends to support compensation planning.
+-- Table Used: employee_record
+-- Columns Used: CONTINENT, COUNTRY, SALARY
+-- Output: CONTINENT, COUNTRY, AVERAGE_SALARY
  
 SELECT CONTINENT, COUNTRY, AVG(SALARY) as 'AVG_SALARY' FROM emp_record_table
 group by 1, 2
