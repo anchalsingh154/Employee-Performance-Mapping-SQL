@@ -22,11 +22,17 @@ Optimize queries using indexes for faster execution.
 🔹 SQL Concepts Used
 
 ✔ Database & Schema creation
+
 ✔ SELECT queries with filters (WHERE, BETWEEN)
+
 ✔ Joins and Unions
+
 ✔ Grouping and Aggregations (MIN, MAX, AVG)
+
 ✔ Window Functions (DENSE_RANK, MAX OVER)
+
 ✔ Views, Stored Procedures, Functions
+
 ✔ Indexing for query optimization
 
 🔹 Key Queries & Insights
