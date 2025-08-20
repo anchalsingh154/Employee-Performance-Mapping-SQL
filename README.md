@@ -62,6 +62,7 @@ Employee Database (simulated dataset)
 Clone the repo:
 
 git clone https://github.com/anchalsingh154/Employee-Performance-Mapping-SQL-Project.git
+
 cd Employee-Performance-Mapping-SQL-Project
 
 Open Project_performance_mapping.sql in MySQL Workbench or any SQL IDE.
