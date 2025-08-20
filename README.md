@@ -58,7 +58,6 @@ Clone the repo:
 git clone https://github.com/anchalsingh154/Employee-Performance-Mapping-SQL-Project.git
 cd Employee-Performance-Mapping-SQL-Project
 
-
 Open Project_performance_mapping.sql in MySQL Workbench or any SQL IDE.
 
 Run queries step by step to explore insights.
@@ -66,9 +65,6 @@ Run queries step by step to explore insights.
 📌 Project Deliverables
 
 ✅ End-to-end SQL script (Project_performance_mapping.sql)
-
 ✅ Stored procedures & functions for HR insights
-
 ✅ Optimized queries with indexing
-
 ✅ Business-driven insights for HR appraisal cycle
