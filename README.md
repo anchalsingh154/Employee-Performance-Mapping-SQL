@@ -1,6 +1,7 @@
 📊 Employee Performance Mapping – SQL Project
 
 🔹 Problem Scenario
+
 ScienceQtech, a startup in the Data Science domain, required analysis of its employee database for HR performance mapping. As part of the HR appraisal cycle, managers provided ratings for employees, and the HR team requested insights into:
 
 Employee details (department, roles, experience)
