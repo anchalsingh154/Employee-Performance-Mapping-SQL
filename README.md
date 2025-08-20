@@ -22,26 +22,25 @@ Optimize queries using indexes for faster execution.
 🔹 SQL Concepts Used
 
 ✔ Database & Schema creation
-
 ✔ SELECT queries with filters (WHERE, BETWEEN)
-
 ✔ Joins and Unions
-
 ✔ Grouping and Aggregations (MIN, MAX, AVG)
-
 ✔ Window Functions (DENSE_RANK, MAX OVER)
-
 ✔ Views, Stored Procedures, Functions
-
 ✔ Indexing for query optimization
 
 🔹 Key Queries & Insights
 
 Employee Reports → Fetch employee details by department.
+
 Performance Analysis → Identify employees with ratings <2, >4, and 2-4.
+
 Concatenated Names → Combine first and last names in Finance dept.
+
 Job Profile Validation → Compare actual vs expected roles based on experience.
+
 Salary Analysis → Min/Max salaries per role, average by continent/country.
+
 Bonuses → Calculate bonus = 5% of salary × rating.
 
 Indexing → Improve search performance for employee names.
@@ -63,3 +62,13 @@ cd Employee-Performance-Mapping-SQL-Project
 Open Project_performance_mapping.sql in MySQL Workbench or any SQL IDE.
 
 Run queries step by step to explore insights.
+
+📌 Project Deliverables
+
+✅ End-to-end SQL script (Project_performance_mapping.sql)
+
+✅ Stored procedures & functions for HR insights
+
+✅ Optimized queries with indexing
+
+✅ Business-driven insights for HR appraisal cycle
