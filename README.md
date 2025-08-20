@@ -22,11 +22,17 @@ Optimize queries using indexes for faster execution.
 🔹 SQL Concepts Used
 
 ✔ Database & Schema creation
+
 ✔ SELECT queries with filters (WHERE, BETWEEN)
+
 ✔ Joins and Unions
+
 ✔ Grouping and Aggregations (MIN, MAX, AVG)
+
 ✔ Window Functions (DENSE_RANK, MAX OVER)
+
 ✔ Views, Stored Procedures, Functions
+
 ✔ Indexing for query optimization
 
 🔹 Key Queries & Insights
@@ -65,6 +71,9 @@ Run queries step by step to explore insights.
 📌 Project Deliverables
 
 ✅ End-to-end SQL script (Project_performance_mapping.sql)
+
 ✅ Stored procedures & functions for HR insights
+
 ✅ Optimized queries with indexing
+
 ✅ Business-driven insights for HR appraisal cycle
